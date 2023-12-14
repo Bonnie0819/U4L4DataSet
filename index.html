@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <canvas id="myChart"></canvas>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+        var year = [];
+       var temp = [];
+       async function getData() {
+           const response = await fetch("SAT2012.csv");
+           const data = await response.text();
+           const rows = data.split("\n").slice(1);
+           rows.forEach((elem) => {
+               const row = elem.split(",");
+            if(row[0].substring(1,4) === '13K') {
+                year.push(row[0].substring(1, row[0].length-1));
+            }
+               temp.push(row[1]);
+               console.log(year);
+           });
+       }
+       getData();
+
+
+       const ctx = document.getElementById('myChart');
+
+
+       new Chart(ctx, {
+           type: 'bar',
+           data: {
+           labels: year,
+           datasets: [{
+               label: 'Average SAT Math Score 2012 for District 13',
+               data: temp,
+               borderWidth: 1,
+               fill: false,
+               borderColor: 'rgb(75, 192, 192)',
+           }]
+           },
+           options: {
+               scales: {
+                   y: {
+                       title: {
+                           display: true,
+                           text: 'Temperature',
+                       }
+                      
+                   },
+                   x: {
+                       title: {
+                           display: true,
+                           text: 'School DBN'
+                       }
+                      
+                   }
+               }
+           }
+       });
+   </script>
+</head>
+<body>
+   <div id="idk"></div>
+</body>
+</html>
+
