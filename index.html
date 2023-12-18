@@ -17,10 +17,10 @@
                const row = elem.split(",");
             if(row[0].substring(1,4) === '13K') {
                 year.push(row[0].substring(1, row[0].length-1));
+                temp.push(row[4].substring(1, row[4].length-1));
             }
-               temp.push(row[1]);
-               console.log(year);
-           });
+            console.log(temp);
+        });
        }
        getData();
 
@@ -38,6 +38,7 @@
                borderWidth: 1,
                fill: false,
                borderColor: 'rgb(75, 192, 192)',
+               backgroundColor: 'rgba(75, 192, 192, 0.2)'
            }]
            },
            options: {
@@ -45,7 +46,7 @@
                    y: {
                        title: {
                            display: true,
-                           text: 'Temperature',
+                           text: 'Average Math SAT Score',
                        }
                       
                    },
